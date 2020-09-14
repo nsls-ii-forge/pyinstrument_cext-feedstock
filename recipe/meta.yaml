@@ -1,0 +1,36 @@
+{% set name = "pyinstrument_cext" %}
+{% set version = "0.2.2" %}
+{% set sha256 = "f29e25f71d74c0415ca9310e5567fff0f5d29f4240a09a885abf8b0eed71cc5b" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - pyinstrument_cext
+
+about:
+  home: https://github.com/joerick/pyinstrument_cext
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: A CPython extension supporting pyinstrument
+  dev_url: https://github.com/joerick/pyinstrument_cext
